@@ -10,6 +10,8 @@ Restart=always
 RestartSec=5
 User=root
 Group=root
+# Without the below 2 environment lines Caddy defaults to storing data in the runtime users home directly. In LibreELEC this 
+# is the root user and /root is a read-only file system which causes Caddy to complain as it can't store necessary runtime data.
 Environment=XDG_CONFIG_HOME=/storage/.config/caddy
 Environment=XDG_DATA_HOME=/storage/.config/caddy/data
 
