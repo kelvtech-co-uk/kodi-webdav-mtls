@@ -2,6 +2,11 @@
 
 This is my solution to enabling Kodi to access a Webdav share served through a proxy that requires mTLS verification of the requesting clients identity.  For me this satisfies my security concerns enough to avoid using a VPN.
 
+### Assumptions
+
+* You already have a configured proxy infront of your webdav server which provides HTTPS endpoints on the public edge and is configured to enforce mTLS verification with all clients request that endpoint.
+* You already have a configured webdav service behind your proxy with a file share configured and a user account that Kodi should use.
+
 ### Setup
 
 LibreELEC is used to install Kodi on a client device which is intended to be remote from the media server/webdav share.
