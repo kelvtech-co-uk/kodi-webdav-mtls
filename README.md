@@ -35,9 +35,9 @@ LibreELEC - my client device is a Minisforum S100 so Intel x86_64 architecture. 
 │        │◄────┤        │◄────┤        │◄──6─┤        │  
 └────────┘     └────────┘     └────────┘     └────────┘ 
 ```
-- 1. Create a Webdav share in Kodi pointing towards port 80 on the localhost and add the Webdav client account credentials you setup in your Webdav server.
-- 2. Caddy is configured to accept the connection request from Kodi and forward it onto the public URL router which Traefik has setup.  This will be something like https://mywebdav.mydomain.com.  Caddy is also configured to forward on the HTTP headers Kodi sent which include the Webdav client account credentials.
-- 3. Traefik acknowledges the connection attempt, supplies the TLS certificate for https://mywebdav.mydomain.com and requests the client to comply with a mTLS handshake.  Traefik will automatically preserve the HTTP headers Caddy shared if the mTLS challenge is successfully completed.
-- 4. Caddy verifies that the TLS certificate it was provided by Traefik is correct and valid.  Once this is done Caddy then supplies the client certificate and associated private key it has been configured with needed to comply with the mTLS handshake.
-- 5. Traefik validates the client certificate and key have been signed by the certificate authority the Traefik router was configured with (mTLS now done) and forwards the connection onto the Webdav server.
-- 6. The Webdav server validates the client account details it recevied in the HTTP header, as well as the requested Webdav resource/share for that account.  Provided all match then connection is allowed and data is returned all the way back to Kodi.
+1. Create a Webdav share in Kodi pointing towards port 80 on the localhost and add the Webdav client account credentials you setup in your Webdav server.
+2. Caddy is configured to accept the connection request from Kodi and forward it onto the public URL router which Traefik has setup.  This will be something like https://mywebdav.mydomain.com.  Caddy is also configured to forward on the HTTP headers Kodi sent which include the Webdav client account credentials.
+3. Traefik acknowledges the connection attempt, supplies the TLS certificate for https://mywebdav.mydomain.com and requests the client to comply with a mTLS handshake.  Traefik will automatically preserve the HTTP headers Caddy shared if the mTLS challenge is successfully completed.
+4. Caddy verifies that the TLS certificate it was provided by Traefik is correct and valid.  Once this is done Caddy then supplies the client certificate and associated private key it has been configured with needed to comply with the mTLS handshake.
+5. Traefik validates the client certificate and key have been signed by the certificate authority the Traefik router was configured with (mTLS now done) and forwards the connection onto the Webdav server.
+6. The Webdav server validates the client account details it recevied in the HTTP header, as well as the requested Webdav resource/share for that account.  Provided all match then connection is allowed and data is returned all the way back to Kodi.
