@@ -21,18 +21,17 @@
 
 http://localhost {
 	reverse_proxy https://mywebdav.mydomain.com:443 {
-		# Pass the Authorization header from the client to the upstream
+		# Pass the Authorization header (webdav credentials) from the client to the upstream
 		header_up Authorization {http.request.header.Authorization}
 
-		# Override the Host header to match the Traefik router
+		# Override the Host HTTP header so that Traefik knows which router to trigger
 		header_up Host mywebdav.mydomain.com
 
-		# This is the transport block for the proxy's connection to the upstream
 		transport http {
-			# Tell Caddy what hostname to use for the TLS handshake
+			# Hostname Caddy should use to verify the Traefik provided TLS cert with
 			tls_server_name mywebdav.mydomain.com
 
-			# Enable mTLS by providing the client certificate and private key
+			# Tell Caddy where the mTLS handshake client cert and key is
 			tls_client_auth /storage/caddy/mTLS_certs/mycertificate.crt /storage/caddy/mTLS_certs/mycertificate.key
 		}
 	}
