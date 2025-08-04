@@ -1,10 +1,10 @@
 {
 	# Configure the global logger
 	log {
-		# Set the log level to debug
+		# Set the log level
 		level info
 
-		# Output to a file
+		# Output to a file (optional and not recommended for production)
 		#		output file /storage/caddy/caddy.log {
 		#			# Optional: Configure log rotation
 		#			roll_size 5mb # Rotate when the file reaches 10 MB
@@ -21,10 +21,10 @@
 
 http://localhost {
 	reverse_proxy https://mywebdav.mydomain.com:443 {
-		# Pass the Authorization header (webdav credentials) from the client to the upstream
+		# Pass on the Authorization header (webdav credentials) shared in the request
 		header_up Authorization {http.request.header.Authorization}
 
-		# Override the Host HTTP header so that Traefik knows which router to trigger
+		# Override the Host HTTP header Caddy adds so that Traefik knows which router to trigger
 		header_up Host mywebdav.mydomain.com
 
 		transport http {
