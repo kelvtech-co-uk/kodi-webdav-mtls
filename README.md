@@ -27,14 +27,14 @@ LibreELEC - my client device is a Minisforum S100 so Intel x86_64 architecture. 
 ### The Process
 
 **NOTE:  The below is just an illustration to aid understanding and not representative to the actual steps implemented by the protocols at play.**
-
+```
 ┌────────┐     ┌────────┐     ┌────────┐     ┌────────┐  
 │Kodi    ├─1──►│Caddy   ├─2──►│Traefik ├─5──►│Sftpgo  │  
 │        │     │(proxy) │◄──3─┤(proxy) │     │(webdav)│  
 │        │     │        ├─4──►│        │     │        │  
 │        │◄────┤        │◄────┤        │◄──6─┤        │  
 └────────┘     └────────┘     └────────┘     └────────┘ 
-
+```
 - 1. Create a Webdav share in Kodi pointing towards port 80 on the localhost and add the Webdav client account credentials you setup in your Webdav server.
 - 2. Caddy is configured to accept the connection request from Kodi and forward it onto the public URL router which Traefik has setup.  This will be something like https://mywebdav.mydomain.com.  Caddy is also configured to forward on the HTTP headers Kodi sent which include the Webdav client account credentials.
 - 3. Traefik acknowledges the connection attempt, supplies the TLS certificate for https://mywebdav.mydomain.com and requests the client to comply with a mTLS handshake.  Traefik will automatically preserve the HTTP headers Caddy shared if the mTLS challenge is successfully completed.
