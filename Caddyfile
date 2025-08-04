@@ -1,0 +1,39 @@
+{
+	# Configure the global logger
+	log {
+		# Set the log level to debug
+		level info
+
+		# Output to a file
+		#		output file /storage/caddy/caddy.log {
+		#			# Optional: Configure log rotation
+		#			roll_size 5mb # Rotate when the file reaches 10 MB
+		#			roll_keep 3 # Keep at most 3 rotated log files
+		#		}
+	}
+
+	# Set the path for Caddy's data, including certificates and autosave
+	# This must be a writable location on LibreELEC
+	storage file_system {
+		root /storage/caddy/data
+	}
+}
+
+http://localhost {
+	reverse_proxy https://mywebdav.mydomain.com:443 {
+		# Pass the Authorization header from the client to the upstream
+		header_up Authorization {http.request.header.Authorization}
+
+		# Override the Host header to match the Traefik router
+		header_up Host mywebdav.mydomain.com
+
+		# This is the transport block for the proxy's connection to the upstream
+		transport http {
+			# Tell Caddy what hostname to use for the TLS handshake
+			tls_server_name mywebdav.mydomain.com
+
+			# Enable mTLS by providing the client certificate and private key
+			tls_client_auth /storage/caddy/mTLS_certs/mycertificate.crt /storage/caddy/mTLS_certs/mycertificate.key
+		}
+	}
+}

@@ -1,0 +1,17 @@
+[Unit]
+Description=Caddy Web Server
+After=network.target
+
+[Service]
+ExecStart=/storage/caddy/caddy run --config /storage/caddy/Caddyfile
+ExecReload=/storage/caddy/caddy reload
+Type=exec
+Restart=always
+RestartSec=5
+User=root
+Group=root
+Environment=XDG_CONFIG_HOME=/storage/.config/caddy
+Environment=XDG_DATA_HOME=/storage/.config/caddy/data
+
+[Install]
+WantedBy=multi-user.target
