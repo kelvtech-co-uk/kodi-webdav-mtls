@@ -27,7 +27,7 @@ Traefik - I've used for a long time as a reverse proxy, its well documented and 
 
 Caddy - is a simple single-binary proxy with a small footprint something like 40mb vs Traefiks 250mb.  And it supports mTLS challenges out of the box and has decent documentation.
 
-LibreELEC - my client device is a Minisforum S100 so Intel x86_64 architecture.  LE supports this out of the box **alomst**, the UFS storage isn't yet supported by LE but is being added into LE's kernel and image.  LE however supports HDR formats out of the box whereas Kodi ontop of Weyland in mainstream distros isn't quite their yet.
+LibreELEC - my client device is a Minisforum S100 so Intel x86_64 architecture.  LE supports this out of the box **almost**; the UFS storage isn't yet supported by LE but is being added into LE's kernel and image.  LE however supports HDR formats out of the box whereas Kodi ontop of Weyland in mainstream distros isn't quite their yet.
 
 ### The Process
 
