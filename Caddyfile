@@ -1,22 +1,15 @@
 {
-	# Configure the global logger
 	log {
-		# Set the log level
 		level info
 
-		# Output to a file (optional and not recommended for production)
-		#		output file /storage/caddy/caddy.log {
-		#			# Optional: Configure log rotation
-		#			roll_size 5mb # Rotate when the file reaches 10 MB
-		#			roll_keep 3 # Keep at most 3 rotated log files
-		#		}
+	#	output file /storage/caddy/caddy.log {
+	#		roll_size 5mb # Rotate when the file reaches 10 MB
+	#		roll_keep 3 # Keep at most 3 rotated log files
+	#	}
 	}
 
-	# Set the path for Caddy's data, including certificates and autosave
-	# This must be a writable location on LibreELEC
-	storage file_system {
-		root /storage/caddy/data
-	}
+	# Set the path for Caddy's runtime data, must be a writable location on LibreELEC
+	storage file_system /storage/.config/caddy/data
 }
 
 http://localhost {
